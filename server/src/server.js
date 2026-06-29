@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
+import graphqlRoutes from './routes/graphql.js';
 import { connectDB } from './config/db.js';
 
 dotenv.config();
@@ -22,6 +23,7 @@ app.get('/api/health', (_, res) => {
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/graphql', graphqlRoutes);
 
 async function bootstrap() {
   try {

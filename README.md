@@ -20,6 +20,7 @@ Arquitectura cliente-servidor con:
 
 - `client/`: interfaz en React
 - `server/`: API, conexión a MongoDB y autenticación JWT
+- `POST /graphql`: consultas y mutaciones GraphQL
 
 ## Variables de entorno
 
@@ -61,3 +62,56 @@ npm run dev
 - El registro guarda el usuario en MongoDB.
 - El login valida email y contraseña.
 - Al autenticar, el servidor genera un JWT y lo imprime junto con los datos de validación.
+
+## Postman
+
+Importa la colección:
+
+- `postman/jwt-auth-api.postman_collection.json`
+
+Variables sugeridas en Postman:
+
+- `baseUrl` = `http://localhost:5000`
+- `token` = se llena automáticamente después del `login`
+
+Orden de prueba:
+
+1. `GET /api/health`
+2. `POST /api/auth/register`
+3. `POST /api/auth/login`
+4. `GET /api/auth/me` con `Authorization: Bearer {{token}}`
+5. `POST /graphql`
+
+## GraphQL
+
+Endpoint:
+
+- `POST http://localhost:5000/graphql`
+
+Ejemplo para listar usuarios:
+
+```json
+{
+  "query": "query { users { id name email createdAt updatedAt } }"
+}
+```
+
+Ejemplo para login:
+
+```json
+{
+  "query": "mutation { login(email: \"juan@example.com\", password: \"123456\") { message token user { id name email } } }"
+}
+```
+
+Ejemplo para `me`:
+
+```json
+{
+  "query": "query { me { id name email } }"
+}
+```
+
+En consultas protegidas usa el header:
+
+- `Authorization: Bearer {{token}}`
