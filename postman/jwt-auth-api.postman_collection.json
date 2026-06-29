@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "JWT Auth API",
-    "description": "Colección para probar register, login y me con JWT.",
+    "description": "Coleccion para probar register, login, me y el CRUD protegido de registros con JWT.",
     "_postman_id": "d8d1b4f6-bb7b-4f3e-9fd0-5f2db2f7e111",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -168,6 +168,112 @@
           ],
           "path": [
             "graphql"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Records - List",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/records",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "records"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Records - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombres\": \"Maria\",\n  \"apellidos\": \"Lopez\",\n  \"edad\": 28,\n  \"profesion\": \"Ingeniera\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/records",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "records"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Records - Update",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombres\": \"Maria Fernanda\",\n  \"apellidos\": \"Lopez\",\n  \"edad\": 29,\n  \"profesion\": \"Arquitecta\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/records/{{recordId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "records",
+            "{{recordId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Records - Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/records/{{recordId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "records",
+            "{{recordId}}"
           ]
         }
       }

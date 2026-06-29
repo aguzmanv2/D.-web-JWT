@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
+import recordRoutes from './routes/records.js';
 import graphqlRoutes from './routes/graphql.js';
 import { connectDB } from './config/db.js';
 
@@ -23,6 +24,7 @@ app.get('/api/health', (_, res) => {
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/api/records', recordRoutes);
 app.use('/graphql', graphqlRoutes);
 
 async function bootstrap() {
@@ -35,7 +37,7 @@ async function bootstrap() {
     console.error('Unable to start server:', error.message);
     if (error.message.includes('bad auth') || error.message.includes('authentication failed')) {
       console.error(
-        'La URI de MongoDB Atlas tiene credenciales inválidas. Revisa usuario, contraseña, permisos en Database Access y codifica la contraseña si contiene caracteres especiales.'
+        'La URI de MongoDB Atlas tiene credenciales invalidas. Revisa usuario, contrasena, permisos en Database Access y codifica la contrasena si contiene caracteres especiales.'
       );
     }
     process.exit(1);
